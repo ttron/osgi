@@ -1,0 +1,18 @@
+-runfw: org.apache.felix.framework;version='[4,5)'
+-runee: JavaSE-1.7
+-runsystemcapabilities: ${native_capability}
+
+-resolve.effective: active;skip:="osgi.service"
+
+-runbundles:  \
+	org.apache.felix.gogo.command;version='[0.15.0,0.15.1)',\
+	org.apache.felix.gogo.runtime;version='[0.13.0,0.13.1)',\
+	org.apache.felix.gogo.shell;version='[0.11.0,0.11.1)',\
+	MyPlugin;version=latest,\
+	osgi.cmpn,\
+	org.amdatu.bootstrap.api,\
+	biz.aQute.bnd
+
+-runrequires:  \
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)'

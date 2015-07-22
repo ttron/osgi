@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Resourceapp
+Bundle-SymbolicName: org.foo.httpservice.resourceapp
+Bundle-Version: 1.0.0.qualifier
+Include-Resource: html=html,images=images
+Import-Package: org.osgi.framework;version="1.7.0",
+ org.osgi.service.http;version="1.2.1"

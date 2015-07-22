@@ -1,0 +1,17 @@
+-buildpath:  \
+	org.apache.felix.dependencymanager,\
+	osgi.core;version=4.3.0,\
+	biz.aQute.bndlib,\
+	osgi.cmpn,\
+	org.amdatu.template,\
+	org.amdatu.bootstrap.api;version=latest,\
+	org.amdatu.bootstrap.plugins.dependencymanager;version=latest,\
+	../cnf/plugins/org.apache.felix.dependencymanager.annotation-3.2.0.jar;version=file,\
+	org.amdatu.bootstrap.core
+	
+-runfw: org.apache.felix.framework;version='[4.2.1,4.2.1]'
+-runee: JavaSE-1.7
+Bundle-Version: 1.0.0
+-resolve: auto
+Private-Package:  \
+	org.amdatu.bootstrap.plugins.myplugin

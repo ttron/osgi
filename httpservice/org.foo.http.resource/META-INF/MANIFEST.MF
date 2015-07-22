@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Resources
+Bundle-SymbolicName: org.foo.http.resources
+Bundle-Version: 1.0.0.qualifier
+Include-Resource: html=html,images=images
+HTTP-Resources: /resource=html,/resource/images=images
+Require-Bundle: org.foo.http.tracker;bundle-version="1.0.0"

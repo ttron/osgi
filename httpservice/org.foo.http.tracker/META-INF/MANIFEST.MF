@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker
+Bundle-SymbolicName: org.foo.http.tracker
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.foo.http.tracker.Activator
+Import-Package: javax.servlet.http;version="2.6.0",
+ org.osgi.framework;version="1.7.0",
+ org.osgi.service.http;version="1.2.1",
+ org.osgi.util.tracker;version="1.5.1"
