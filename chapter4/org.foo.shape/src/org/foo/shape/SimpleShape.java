@@ -31,7 +31,6 @@ import java.awt.Point;
  **/
 public interface SimpleShape
 {
-
 	/**
 	 * A service property for the name of the shape.
 	 **/

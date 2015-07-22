@@ -18,8 +18,12 @@
  */
 package org.foo.paint;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Point;
+
 import javax.swing.ImageIcon;
+
 import org.foo.shape.SimpleShape;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -100,6 +104,7 @@ class DefaultShape implements SimpleShape
 	 * @param g2 The graphics object used for painting.
 	 * @param p The position to paint the triangle.
 	 **/
+	@Override
 	public void draw(Graphics2D g2, Point p)
 	{
 		// If this is a proxy shape, instantiate the shape class

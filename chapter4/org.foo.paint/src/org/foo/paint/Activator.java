@@ -20,9 +20,13 @@ package org.foo.paint;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import org.osgi.framework.*;
+
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 
 /**
  * The activator of the host application bundle. The activator creates the main
@@ -48,6 +52,7 @@ public class Activator implements BundleActivator, Runnable
 	 * 
 	 * @param context The context of the bundle.
 	 **/
+	@Override
 	public void start(BundleContext context)
 	{
 		m_context = context;
@@ -74,12 +79,14 @@ public class Activator implements BundleActivator, Runnable
 	 * 
 	 * @param context The context of the bundle.
 	 **/
+	@Override
 	public void stop(BundleContext context)
 	{
 		m_shapetracker.close();
 		final PaintFrame frame = m_frame;
 		javax.swing.SwingUtilities.invokeLater( new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				frame.setVisible( false );
@@ -94,13 +101,14 @@ public class Activator implements BundleActivator, Runnable
 	 * intended to be called by the Swing event thread and should not be called
 	 * directly.
 	 **/
+	@Override
 	public void run()
 	{
 		m_frame = new PaintFrame();
-
 		m_frame.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
 		m_frame.addWindowListener( new WindowAdapter()
 		{
+			@Override
 			public void windowClosing(WindowEvent evt)
 			{
 				try
@@ -117,6 +125,6 @@ public class Activator implements BundleActivator, Runnable
 		m_frame.setVisible( true );
 
 		m_shapetracker = new ShapeTracker( m_context, m_frame );
-		m_shapetracker.open();
+		m_shapetracker.open();// @_@
 	}
 }

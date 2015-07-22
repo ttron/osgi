@@ -19,7 +19,9 @@
 package org.foo.shape.triangle;
 
 import java.util.Hashtable;
+
 import javax.swing.ImageIcon;
+
 import org.foo.shape.SimpleShape;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -41,10 +43,11 @@ public class Activator implements BundleActivator
 	 * 
 	 * @param context The context for the bundle.
 	 **/
+	@Override
 	public void start(BundleContext context)
 	{
 		m_context = context;
-		Hashtable dict = new Hashtable();
+		Hashtable<String, Object> dict = new Hashtable<String, Object>();
 		dict.put( SimpleShape.NAME_PROPERTY, "Triangle" );
 		dict.put( SimpleShape.ICON_PROPERTY, new ImageIcon( this.getClass().getResource( "triangle.png" ) ) );
 		m_context.registerService( SimpleShape.class.getName(), new Triangle(), dict );
@@ -56,6 +59,7 @@ public class Activator implements BundleActivator
 	 * 
 	 * @param context The context for the bundle.
 	 **/
+	@Override
 	public void stop(BundleContext context)
 	{
 	}

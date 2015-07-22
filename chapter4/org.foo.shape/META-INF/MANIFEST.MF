@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Paint
+Bundle-Name: Paint Simple Shape
 Bundle-SymbolicName: org.foo.shape
 Bundle-Version: 4.0.0.qualifier
 Import-Package: javax.swing,

@@ -1,0 +1,8 @@
+-buildpath:  \
+	osgi.core
+Bundle-Version: 1.0.0
+Import-Package:  \
+	*
+Export-Package:  \
+	org.foo.log.service
+Bundle-Activator: org.foo.log.service.Activator

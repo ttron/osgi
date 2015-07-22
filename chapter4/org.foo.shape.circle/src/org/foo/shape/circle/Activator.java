@@ -19,7 +19,9 @@
 package org.foo.shape.circle;
 
 import java.util.Hashtable;
+
 import javax.swing.ImageIcon;
+
 import org.foo.shape.SimpleShape;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -30,27 +32,35 @@ import org.osgi.framework.BundleContext;
  * the circle service object and registers it with the service registry along
  * with the service properties indicating the service's name and icon.
  **/
-public class Activator implements BundleActivator {
-  private BundleContext m_context = null;
+public class Activator implements BundleActivator
+{
+	private BundleContext m_context = null;
 
-  /**
-   * Implements the <tt>BundleActivator.start()</tt> method, which registers the
-   * circle <tt>SimpleShape</tt> service.
-   * 
-   * @param context The context for the bundle.
-   **/
-  public void start(BundleContext context) {
-    m_context = context;
-    Hashtable dict = new Hashtable();
-    dict.put(SimpleShape.NAME_PROPERTY, "Circle");
-    dict.put(SimpleShape.ICON_PROPERTY, new ImageIcon(this.getClass().getResource("circle.png")));
-    m_context.registerService(SimpleShape.class.getName(), new Circle(), dict);
-  }
 
-  /**
-   * Implements the <tt>BundleActivator.start()</tt> method, which does nothing.
-   * 
-   * @param context The context for the bundle.
-   **/
-  public void stop(BundleContext context) {}
+	/**
+	 * Implements the <tt>BundleActivator.start()</tt> method, which registers the
+	 * circle <tt>SimpleShape</tt> service.
+	 * 
+	 * @param context The context for the bundle.
+	 **/
+	@Override
+	public void start(BundleContext context)
+	{
+		m_context = context;
+		Hashtable<String, Object> dict = new Hashtable<String, Object>();
+		dict.put( SimpleShape.NAME_PROPERTY, "Circle" );
+		dict.put( SimpleShape.ICON_PROPERTY, new ImageIcon( this.getClass().getResource( "circle.png" ) ) );
+		m_context.registerService( SimpleShape.class.getName(), new Circle(), dict );
+	}
+
+
+	/**
+	 * Implements the <tt>BundleActivator.start()</tt> method, which does nothing.
+	 * 
+	 * @param context The context for the bundle.
+	 **/
+	@Override
+	public void stop(BundleContext context)
+	{
+	}
 }

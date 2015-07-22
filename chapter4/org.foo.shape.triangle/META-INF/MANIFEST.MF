@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Paint
+Bundle-Name: Paint Triangle
 Bundle-SymbolicName: org.foo.shape.triangle
 Bundle-Version: 1.0.0.qualifier
 Import-Package: javax.swing,

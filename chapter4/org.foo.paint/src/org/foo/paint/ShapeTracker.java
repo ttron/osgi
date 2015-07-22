@@ -20,8 +20,11 @@ package org.foo.paint;
 
 import javax.swing.Icon;
 import javax.swing.SwingUtilities;
+
 import org.foo.shape.SimpleShape;
-import org.osgi.framework.*;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
@@ -44,10 +47,10 @@ public class ShapeTracker extends ServiceTracker
 	private static final int REMOVED = 3;
 
 	// The bundle context used for tracking.
-	private BundleContext m_context;
+	private final BundleContext m_context;
 
 	// The application object to notify.
-	private PaintFrame m_frame;
+	private final PaintFrame m_frame;
 
 
 	/**
@@ -72,6 +75,7 @@ public class ShapeTracker extends ServiceTracker
 	 * @param ref The service reference of the added service.
 	 * @return The service object to be used by the tracker.
 	 **/
+	@Override
 	public Object addingService(ServiceReference ref)
 	{
 		SimpleShape shape = new DefaultShape( m_context, ref );
@@ -87,6 +91,7 @@ public class ShapeTracker extends ServiceTracker
 	 * @param ref The service reference of the modified service.
 	 * @param svc The service object of the modified service.
 	 **/
+	@Override
 	public void modifiedService(ServiceReference ref, Object svc)
 	{
 		processShapeOnEventThread( MODIFIED, ref, (SimpleShape) svc );
@@ -100,6 +105,7 @@ public class ShapeTracker extends ServiceTracker
 	 * @param ref The service reference of the removed service.
 	 * @param svc The service object of the removed service.
 	 **/
+	@Override
 	public void removedService(ServiceReference ref, Object svc)
 	{
 		processShapeOnEventThread( REMOVED, ref, (SimpleShape) svc );
@@ -178,11 +184,11 @@ public class ShapeTracker extends ServiceTracker
 	 **/
 	private class ShapeRunnable implements Runnable
 	{
-		private int m_action;
+		private final int m_action;
 
-		private ServiceReference m_ref;
+		private final ServiceReference m_ref;
 
-		private SimpleShape m_shape;
+		private final SimpleShape m_shape;
 
 
 		/**
@@ -204,6 +210,7 @@ public class ShapeTracker extends ServiceTracker
 		/**
 		 * Calls the <tt>processShape()</tt> method.
 		 **/
+		@Override
 		public void run()
 		{
 			processShape( m_action, m_ref, m_shape );
