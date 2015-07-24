@@ -1,5 +1,6 @@
 -buildpath:  \
-	osgi.core
+	osgi.core,\
+	org.apache.felix.ipojo
 Bundle-Version: 1.0.0
 Import-Package:  \
 	*

@@ -18,62 +18,99 @@
  */
 package org.foo.log.service;
 
-import org.osgi.framework.*;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.Constants;
+import org.osgi.framework.ServiceFactory;
+import org.osgi.framework.ServiceReference;
+import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.log.LogService;
 
 /**
  * Partial implementation of the OSGi LogService API.
  **/
-public class Activator implements BundleActivator {
+public class Activator implements BundleActivator
+{
 
-  /**
-   * @param context The context of the bundle.
-   **/
-  public void start(BundleContext context) {
-    context.registerService(LogService.class.getName(), new DummyLogServiceFactory(), null);
-  }
+	/**
+	 * @param context The context of the bundle.
+	 **/
+	@Override
+	public void start(BundleContext context)
+	{
+		context.registerService( LogService.class.getName(), new DummyLogServiceFactory(), null );
+	}
 
-  /**
-   * @param context The context of the bundle.
-   **/
-  public void stop(BundleContext context) {}
 
-  /**
-   * Customize the LogService for each bundle that requests it.
-   **/
-  static class DummyLogServiceFactory implements ServiceFactory {
-    public Object getService(final Bundle bundle, final ServiceRegistration registration) {
+	/**
+	 * @param context The context of the bundle.
+	 **/
+	@Override
+	public void stop(BundleContext context)
+	{
+	}
 
-      LogService service = new LogService() {
-        public void log(int level, String message) {
+	/**
+	 * Customize the LogService for each bundle that requests it.
+	 **/
+	static class DummyLogServiceFactory implements ServiceFactory
+	{
+		@Override
+		public Object getService(final Bundle bundle, final ServiceRegistration registration)
+		{
 
-          String tid = "thread=\"" + Thread.currentThread().getName() + "\"";
-          String bid = "bundle=" + bundle.getBundleId();
+			LogService service = new LogService()
+			{
+				@Override
+				public void log(int level, String message)
+				{
 
-          Object sid;
-          try {
-            sid = registration.getReference().getProperty(Constants.SERVICE_ID);
-          } catch (RuntimeException re) {
-            sid = "!!"; // this service is no longer valid and shouldn't be used
-          }
+					String tid = "thread=\"" + Thread.currentThread().getName() + "\"";
+					String bid = "bundle=" + bundle.getBundleId();
 
-          System.out.println("<" + sid + "> " + tid + ", " + bid + " : " + message);
-        }
+					Object sid;
+					try
+					{
+						sid = registration.getReference().getProperty( Constants.SERVICE_ID );
+					}
+					catch (RuntimeException re)
+					{
+						sid = "!!"; // this service is no longer valid and shouldn't be used
+					}
 
-        public void log(int level, String message, Throwable exception) {}
+					System.out.println( "<" + sid + "> " + tid + ", " + bid + " : " + message );
+				}
 
-        public void log(ServiceReference sr, int level, String message) {}
 
-        public void log(ServiceReference sr, int level, String message, Throwable exception) {}
-      };
+				@Override
+				public void log(int level, String message, Throwable exception)
+				{
+				}
 
-      service.log(LogService.LOG_INFO, "logging ON");
 
-      return service;
-    }
+				@Override
+				public void log(ServiceReference sr, int level, String message)
+				{
+				}
 
-    public void ungetService(Bundle bundle, ServiceRegistration registration, Object service) {
-      ((LogService) service).log(LogService.LOG_INFO, "logging OFF");
-    }
-  }
+
+				@Override
+				public void log(ServiceReference sr, int level, String message, Throwable exception)
+				{
+				}
+			};
+
+			service.log( LogService.LOG_INFO, "logging ON" );
+
+			return service;
+		}
+
+
+		@Override
+		public void ungetService(Bundle bundle, ServiceRegistration registration, Object service)
+		{
+			((LogService) service).log( LogService.LOG_INFO, "logging OFF" );
+		}
+	}
 }
