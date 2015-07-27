@@ -35,7 +35,7 @@ import org.osgi.util.tracker.ServiceTracker;
  * notifications to be processed on the Swing event thread to avoid
  * synchronization and redraw issues.
  **/
-public class ShapeTracker extends ServiceTracker
+public class ShapeTracker extends ServiceTracker<SimpleShape, Object>
 {
 	// Flag indicating an added shape.
 	private static final int ADDED = 1;
@@ -76,7 +76,7 @@ public class ShapeTracker extends ServiceTracker
 	 * @return The service object to be used by the tracker.
 	 **/
 	@Override
-	public Object addingService(ServiceReference ref)
+	public Object addingService(ServiceReference<SimpleShape> ref)
 	{
 		SimpleShape shape = new DefaultShape( m_context, ref );
 		processShapeOnEventThread( ADDED, ref, shape );
@@ -92,7 +92,7 @@ public class ShapeTracker extends ServiceTracker
 	 * @param svc The service object of the modified service.
 	 **/
 	@Override
-	public void modifiedService(ServiceReference ref, Object svc)
+	public void modifiedService(ServiceReference<SimpleShape> ref, Object svc)
 	{
 		processShapeOnEventThread( MODIFIED, ref, (SimpleShape) svc );
 	}
@@ -106,7 +106,7 @@ public class ShapeTracker extends ServiceTracker
 	 * @param svc The service object of the removed service.
 	 **/
 	@Override
-	public void removedService(ServiceReference ref, Object svc)
+	public void removedService(ServiceReference<SimpleShape> ref, Object svc)
 	{
 		processShapeOnEventThread( REMOVED, ref, (SimpleShape) svc );
 		((DefaultShape) svc).dispose();
@@ -122,7 +122,7 @@ public class ShapeTracker extends ServiceTracker
 	 * @param ref The service reference of the corresponding service.
 	 * @param shape The service object of the corresponding service.
 	 **/
-	private void processShapeOnEventThread(int action, ServiceReference ref, SimpleShape shape)
+	private void processShapeOnEventThread(int action, ServiceReference<SimpleShape> ref, SimpleShape shape)
 	{
 		if ((m_context.getBundle( 0 ).getState() & (Bundle.STARTING | Bundle.ACTIVE)) == 0)
 		{
@@ -156,7 +156,7 @@ public class ShapeTracker extends ServiceTracker
 	 * @param ref The service reference of the corresponding service.
 	 * @param shape The service object of the corresponding service.
 	 **/
-	private void processShape(int action, ServiceReference ref, SimpleShape shape)
+	private void processShape(int action, ServiceReference<SimpleShape> ref, SimpleShape shape)
 	{
 		String name = (String) ref.getProperty( SimpleShape.NAME_PROPERTY );
 
@@ -186,7 +186,7 @@ public class ShapeTracker extends ServiceTracker
 	{
 		private final int m_action;
 
-		private final ServiceReference m_ref;
+		private final ServiceReference<SimpleShape> m_ref;
 
 		private final SimpleShape m_shape;
 
@@ -199,7 +199,7 @@ public class ShapeTracker extends ServiceTracker
 		 * @param ref The service reference of the corresponding service.
 		 * @param shape The service object of the corresponding service.
 		 **/
-		public ShapeRunnable(int action, ServiceReference ref, SimpleShape shape)
+		public ShapeRunnable(int action, ServiceReference<SimpleShape> ref, SimpleShape shape)
 		{
 			m_action = action;
 			m_ref = ref;

@@ -53,7 +53,7 @@ class DefaultShape implements SimpleShape
 
 	private BundleContext m_context;
 
-	private ServiceReference m_ref;
+	private ServiceReference<SimpleShape> m_ref;
 
 
 	/**
@@ -72,7 +72,7 @@ class DefaultShape implements SimpleShape
 	 * @param context The bundle context to use for retrieving the shape service.
 	 * @param ref The service reference of the service.
 	 **/
-	public DefaultShape(BundleContext context, ServiceReference ref)
+	public DefaultShape(BundleContext context, ServiceReference<SimpleShape> ref)
 	{
 		m_context = context;
 		m_ref = ref;
@@ -116,7 +116,7 @@ class DefaultShape implements SimpleShape
 				if (m_shape == null)
 				{
 					// Get the shape service.
-					m_shape = (SimpleShape) m_context.getService( m_ref );
+					m_shape = m_context.getService( m_ref );
 				}
 				// Draw the shape.
 				m_shape.draw( g2, p );
