@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: osgi-http-service
+Bundle-SymbolicName: osgi-http-service
+Bundle-Version: 1.0.0.qualifier
+Built-By: jerseyrobot
+Build-Jdk: 1.8.0
+Created-By: Apache Maven
+Archiver-Version: Plexus Archiver
+Export-Package: org.glassfish.jersey.examples.osgihttpservice
