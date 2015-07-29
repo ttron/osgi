@@ -58,30 +58,37 @@ import org.osgi.util.tracker.ServiceTracker;
 
 public class Activator implements BundleActivator
 {
-
-	private BundleContext bc;
+	private BundleContext context;
 
 	private ServiceTracker tracker;
 
 	private HttpService httpService = null;
 
-	private static final Logger logger = Logger.getLogger( Activator.class.getName() );
+	private static final Logger LOG = Logger.getLogger( Activator.class.getName() );
 
 
 	@Override
 	public synchronized void start(BundleContext bundleContext) throws Exception
 	{
-		this.bc = bundleContext;
+		this.context = bundleContext;
 
-		logger.info( "STARTING HTTP SERVICE BUNDLE" );
+		LOG.info( "STARTING HTTP SERVICE BUNDLE" );
 
-		this.tracker = new ServiceTracker( this.bc, HttpService.class.getName(), null )
+		this.tracker = new ServiceTracker( this.context, HttpService.class.getName(), null )
 		{
 
 			@Override
 			public Object addingService(ServiceReference serviceRef)
 			{
 				httpService = (HttpService) super.addingService( serviceRef );
+				try
+				{
+					httpService.registerResources( "/", "/html", null );
+				}
+				catch (NamespaceException e)
+				{
+					e.printStackTrace();
+				}
 				registerServlets();
 				return httpService;
 			}
@@ -101,7 +108,7 @@ public class Activator implements BundleActivator
 
 		this.tracker.open();
 
-		logger.info( "HTTP SERVICE BUNDLE STARTED" );
+		LOG.info( "HTTP SERVICE BUNDLE STARTED" );
 	}
 
 
@@ -127,8 +134,8 @@ public class Activator implements BundleActivator
 
 	private void rawRegisterServlets() throws ServletException, NamespaceException, InterruptedException
 	{
-		logger.info( "JERSEY BUNDLE: REGISTERING SERVLETS" );
-		logger.info( "JERSEY BUNDLE: HTTP SERVICE = " + httpService.toString() );
+		LOG.info( "JERSEY BUNDLE: REGISTERING SERVLETS" );
+		LOG.info( "JERSEY BUNDLE: HTTP SERVICE = " + httpService.toString() );
 
 		// TODO - temporary workaround
 		// This is a workaround related to issue JERSEY-2093; grizzly (1.9.5) needs to have the correct
@@ -151,23 +158,23 @@ public class Activator implements BundleActivator
 		// getJerseyServletParams(), null);
 
 		sendAdminEvent();
-		logger.info( "JERSEY BUNDLE: SERVLETS REGISTERED" );
+		LOG.info( "JERSEY BUNDLE: SERVLETS REGISTERED" );
 	}
 
 
 	private void sendAdminEvent()
 	{
-		ServiceReference eaRef = bc.getServiceReference( EventAdmin.class.getName() );
+		ServiceReference eaRef = context.getServiceReference( EventAdmin.class.getName() );
 		if (eaRef != null)
 		{
-			EventAdmin ea = (EventAdmin) bc.getService( eaRef );
+			EventAdmin ea = (EventAdmin) context.getService( eaRef );
 			ea.sendEvent( new Event( "jersey/test/DEPLOYED", new Hashtable<String, String>()
 			{
 				{
 					put( "context-path", "/" );
 				}
 			} ) );
-			bc.ungetService( eaRef );
+			context.ungetService( eaRef );
 		}
 	}
 
@@ -176,9 +183,9 @@ public class Activator implements BundleActivator
 	{
 		if (this.httpService != null)
 		{
-			logger.info( "JERSEY BUNDLE: UNREGISTERING SERVLETS" );
+			LOG.info( "JERSEY BUNDLE: UNREGISTERING SERVLETS" );
 			httpService.unregister( "/jersey-http-service" );
-			logger.info( "JERSEY BUNDLE: SERVLETS UNREGISTERED" );
+			LOG.info( "JERSEY BUNDLE: SERVLETS UNREGISTERED" );
 		}
 	}
 

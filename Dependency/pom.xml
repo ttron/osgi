@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.ttron.lab</groupId>
+	<artifactId>dependency</artifactId>
+	<name>${project.groupId}:${project.artifactId}</name>
+	<packaging>jar</packaging>
+	<version>1.0.0</version>
+	<inceptionYear>2015</inceptionYear>
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+			<id>tsst-releases</id>
+			<name>Tsst Internal Releases</name>
+			<url>http://maven.tsst.cc/nexus/content/groups/tsst/</url>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+			<id>tsst-snapshots</id>
+			<name>Tsst Snapshots Repository</name>
+			<url>http://maven.tsst.cc/nexus/content/repositories/tsst-snapshots/</url>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>tsst-releases</id>
+			<name>Tsst Internal Releases</name>
+			<url>http://maven.tsst.cc/nexus/content/repositories/tsst-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>tsst-snapshots</id>
+			<name>Tsst Snapshots Repository</name>
+			<url>http://maven.tsst.cc/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>tsst-releases</id>
+			<name>Tsst Internal Releases</name>
+			<url>http://maven.tsst.cc/nexus/content/groups/tsst/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- Define nexus versions. The 'nexus.version' property always refers 
+			to the version of the current project. These values must always be constants; 
+			'nexus.version' will get update automatically by set-version. -->
+		<nexus.version>2.11.2-06</nexus.version>
+		<!-- FIXME: WTF is this for, part of the http proxy changes, used in subst 
+			in test files :-( -->
+		<nexus.configuration.version>2.8.0</nexus.configuration.version>
+		<!-- Configuration of 'nexus-plugin' packaging and bundles. -->
+		<nexus-plugin-bundle.version>1.2</nexus-plugin-bundle.version>
+		<nexus-plugin.type>nexus-plugin</nexus-plugin.type>
+		<!-- logging configuration used in logback config files to control test 
+			logging -->
+		<test.log.level>INFO</test.log.level>
+		<test.log.pattern>%date %level [%thread%X{DC}] %logger - %msg%n</test.log.pattern>
+		<it.test.log.level>INFO</it.test.log.level>
+		<it.nexus.log.level>INFO</it.nexus.log.level>
+		<!-- nexus integration-testing bundle configuration -->
+		<it.nexus.bundle.groupId>cn.ttron.lab.nexus.assemblies</it.nexus.bundle.groupId>
+		<it.nexus.bundle.artifactId>nexus-bundle-template</it.nexus.bundle.artifactId>
+		<it.nexus.bundle.version>${nexus.version}</it.nexus.bundle.version>
+		<!-- compiler plugin configuration, we are Java7 but some child modules 
+			will override these properties to remain on Java6 -->
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<eclipse-jetty.version>8.1.11.v20130520</eclipse-jetty.version>
+		<osgi-spec.version>6.0.0</osgi-spec.version>
+		<log4j.version>2.2</log4j.version>
+		<slf4j.version>1.7.12</slf4j.version>
+		<logback.version>1.1.2</logback.version>
+		<yammer-metrics.version>2.2.0</yammer-metrics.version>
+		<google.guice.version>4.0</google.guice.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>${osgi-spec.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.ipojo</artifactId>
+			<version>1.12.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.http.servlet-api</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.http.jetty</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.hk2.external</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>2.4.0-b27</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.hk2.external</groupId>
+			<artifactId>aopalliance-repackaged</artifactId>
+			<version>2.4.0-b27</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.http.bundle</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<plugins>
+		</plugins>
+	</build>
+</project>

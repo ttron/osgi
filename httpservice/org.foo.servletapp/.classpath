@@ -6,5 +6,6 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="lib/org.apache.felix.ipojo-1.12.1.jar"/>
 	<classpathentry kind="lib" path="lib/org.apache.felix.ipojo.annotations-1.12.1.jar"/>
+	<classpathentry kind="con" path="aQute.bnd.classpath.container"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
