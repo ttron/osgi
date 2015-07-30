@@ -146,7 +146,11 @@
 			<artifactId>org.apache.felix.http.bundle</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.18.1.GA</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -83,7 +83,7 @@ public class Activator implements BundleActivator
 				httpService = (HttpService) super.addingService( serviceRef );
 				try
 				{
-					httpService.registerResources( "/", "/html", null );
+					httpService.registerResources( "/html", "html", null );
 				}
 				catch (NamespaceException e)
 				{
@@ -164,17 +164,17 @@ public class Activator implements BundleActivator
 
 	private void sendAdminEvent()
 	{
-		ServiceReference eaRef = context.getServiceReference( EventAdmin.class.getName() );
-		if (eaRef != null)
+		ServiceReference ref = context.getServiceReference( EventAdmin.class.getName() );
+		if (ref != null)
 		{
-			EventAdmin ea = (EventAdmin) context.getService( eaRef );
+			EventAdmin ea = (EventAdmin) context.getService( ref );
 			ea.sendEvent( new Event( "jersey/test/DEPLOYED", new Hashtable<String, String>()
 			{
 				{
 					put( "context-path", "/" );
 				}
 			} ) );
-			context.ungetService( eaRef );
+			context.ungetService( ref );
 		}
 	}
 
@@ -185,6 +185,7 @@ public class Activator implements BundleActivator
 		{
 			LOG.info( "JERSEY BUNDLE: UNREGISTERING SERVLETS" );
 			httpService.unregister( "/jersey-http-service" );
+			httpService.unregister( "/html" );
 			LOG.info( "JERSEY BUNDLE: SERVLETS UNREGISTERED" );
 		}
 	}

@@ -1,0 +1,8 @@
+-buildpath:  \
+	org.apache.felix.http.api,\
+	osgi.core,\
+	osgi.cmpn,\
+	osgi.residential,\
+	javax.servlet-api
+Export-Package:  \
+	org.foo.http.tracker

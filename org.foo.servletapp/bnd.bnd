@@ -1,0 +1,8 @@
+-buildpath:  \
+	javax.servlet-api,\
+	org.apache.felix.ipojo,\
+	org.apache.felix.ipojo.annotations,\
+	org.apache.felix.ipojo.webconsole,\
+	osgi.compendium
+Export-Package:  \
+	org.foo.webapp.servletapp

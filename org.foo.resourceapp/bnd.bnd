@@ -1,0 +1,9 @@
+-buildpath:  \
+	org.apache.felix.ipojo,\
+	org.apache.felix.ipojo.annotations,\
+	javax.servlet-api,\
+	osgi.cmpn,\
+	osgi.compendium,\
+	osgi.core
+Export-Package:  \
+	org.foo.httpservice.resourceapp
