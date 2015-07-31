@@ -44,6 +44,16 @@ public class Activator implements BundleActivator
 				{
 					exception.printStackTrace();
 				}
+
+				try
+				{
+					httpService.registerResources( "/static", "D:/Downloads", null );
+				}
+				catch (Exception exception)
+				{
+					exception.printStackTrace();
+				}
+
 				return httpService;
 			}
 		};
