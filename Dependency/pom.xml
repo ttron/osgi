@@ -92,7 +92,7 @@
 			will override these properties to remain on Java6 -->
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
-		<eclipse-jetty.version>8.1.11.v20130520</eclipse-jetty.version>
+		<eclipse-jetty.version>9.3.1.v20150714</eclipse-jetty.version>
 		<osgi-spec.version>6.0.0</osgi-spec.version>
 		<log4j.version>2.2</log4j.version>
 		<slf4j.version>1.7.12</slf4j.version>
@@ -146,10 +146,55 @@
 			<artifactId>org.apache.felix.http.bundle</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>javassist</groupId> -->
+		<!-- <artifactId>javassist</artifactId> -->
+		<!-- <version>3.18.1.GA</version> -->
+		<!-- </dependency> -->
 		<dependency>
-			<groupId>javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.18.1.GA</version>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>${eclipse-jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-util</artifactId>
+			<version>${eclipse-jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-io</artifactId>
+			<version>${eclipse-jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${eclipse-jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<version>${eclipse-jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-security</artifactId>
+			<version>${eclipse-jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-xml</artifactId>
+			<version>${eclipse-jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty.osgi</groupId>
+			<artifactId>jetty-osgi-boot</artifactId>
+			<version>${eclipse-jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty.osgi</groupId>
+			<artifactId>jetty-httpservice</artifactId>
+			<version>${eclipse-jetty.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

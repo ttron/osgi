@@ -1,0 +1,28 @@
+-buildpath:  \
+	osgi.core,\
+	org.eclipse.jetty.server,\
+	org.eclipse.jetty.webapp,\
+	org.eclipse.jetty.servlet,\
+	javax.servlet-api
+	
+Bundle-Version: 1.0.0
+Bundle-Activator: cn.ttron.lab.osgi.jetty.Activator
+Export-Package:  \
+	cn.ttron.lab.osgi.jetty
+-runfw: org.apache.felix.framework;version='[4.4,4.6]'
+-runee: JavaSE-1.8
+-runrequires:  \
+	osgi.identity;filter:='(osgi.identity=osgi-jetty-webapp)'
+-runbundles:  \
+	org.apache.felix.http.servlet-api;version='[1.1.0,1.1.1)',\
+	org.eclipse.jetty.http;version='[9.3.1,9.3.2)',\
+	org.eclipse.jetty.io;version='[9.3.1,9.3.2)',\
+	org.eclipse.jetty.security;version='[9.3.1,9.3.2)',\
+	org.eclipse.jetty.server;version='[9.3.1,9.3.2)',\
+	org.eclipse.jetty.servlet;version='[9.3.1,9.3.2)',\
+	org.eclipse.jetty.util;version='[9.3.1,9.3.2)',\
+	org.eclipse.jetty.webapp;version='[9.3.1,9.3.2)',\
+	org.eclipse.jetty.xml;version='[9.3.1,9.3.2)',\
+	osgi-jetty-webapp;version=latest,\
+	osgi-jetty-server;version=latest
+-runvm: -Djetty.port=9763 -Djetty.home=M:/W/amdatu-do/osgi-jetty-server
