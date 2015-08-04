@@ -1,28 +1,46 @@
--buildpath:  \
-	osgi.core,\
-	org.eclipse.jetty.server,\
-	org.eclipse.jetty.webapp,\
-	org.eclipse.jetty.servlet,\
-	javax.servlet-api
-	
 Bundle-Version: 1.0.0
 Bundle-Activator: cn.ttron.lab.osgi.jetty.Activator
 Export-Package:  \
 	cn.ttron.lab.osgi.jetty
+src:src/main/java
+bin:target/classes
+-buildpath:  \
+	osgi.core,\
+	org.eclipse.jetty.servlet,\
+	org.eclipse.jetty.server,\
+	org.eclipse.jetty.webapp,\
+	javax.servlet-api,\
+	org.eclipse.jetty.util,\
+	osgi.cmpn
+-runrequires:  \
+	osgi.identity;filter:='(osgi.identity=osgi-jetty-webapp)',\
+	osgi.identity;filter:='(osgi.identity=javax.servlet-api)',\
+	osgi.identity;filter:='(osgi.identity=osgi.cmpn)',\
+	osgi.identity;filter:='(osgi.identity=org.ops4j.pax.logging.pax-logging-service)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)',\
+	osgi.identity;filter:='(osgi.identity=org.eclipse.jetty.osgi.boot)'
 -runfw: org.apache.felix.framework;version='[4.4,4.6]'
 -runee: JavaSE-1.8
--runrequires:  \
-	osgi.identity;filter:='(osgi.identity=osgi-jetty-webapp)'
 -runbundles:  \
-	org.apache.felix.http.servlet-api;version='[1.1.0,1.1.1)',\
+	com.springsource.org.apache.commons.logging;version='[1.1.1,1.1.2)',\
+	javax.servlet-api;version='[3.1.0,3.1.1)',\
+	org.apache.felix.gogo.command;version='[0.15.0,0.15.1)',\
+	org.apache.felix.gogo.runtime;version='[0.13.0,0.13.1)',\
+	org.apache.felix.gogo.shell;version='[0.11.0,0.11.1)',\
+	org.eclipse.jetty.deploy;version='[9.3.1,9.3.2)',\
 	org.eclipse.jetty.http;version='[9.3.1,9.3.2)',\
 	org.eclipse.jetty.io;version='[9.3.1,9.3.2)',\
+	org.eclipse.jetty.osgi.boot;version='[9.3.1,9.3.2)',\
 	org.eclipse.jetty.security;version='[9.3.1,9.3.2)',\
 	org.eclipse.jetty.server;version='[9.3.1,9.3.2)',\
 	org.eclipse.jetty.servlet;version='[9.3.1,9.3.2)',\
 	org.eclipse.jetty.util;version='[9.3.1,9.3.2)',\
 	org.eclipse.jetty.webapp;version='[9.3.1,9.3.2)',\
 	org.eclipse.jetty.xml;version='[9.3.1,9.3.2)',\
-	osgi-jetty-webapp;version=latest,\
-	osgi-jetty-server;version=latest
--runvm: -Djetty.port=9763 -Djetty.home=M:/W/amdatu-do/osgi-jetty-server
+	org.ops4j.pax.logging.pax-logging-api;version='[1.7.0,1.7.1)',\
+	org.ops4j.pax.logging.pax-logging-service;version='[1.7.0,1.7.1)',\
+	osgi.cmpn;version='[5.0.0,5.0.1)',\
+	osgi-jetty-server;version=latest,\
+	osgi-jetty-webapp;version=latest
+-runvm: -Dorg.osgi.service.http.port=9090
