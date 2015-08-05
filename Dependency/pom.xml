@@ -99,8 +99,15 @@
 		<logback.version>1.1.2</logback.version>
 		<yammer-metrics.version>2.2.0</yammer-metrics.version>
 		<google.guice.version>4.0</google.guice.version>
+		<hk2.version>2.4.0-b29</hk2.version>
+		<jersey.version>2.19</jersey.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.compendium</artifactId>
@@ -132,14 +139,29 @@
 			<version>3.0.2</version>
 		</dependency>
 		<dependency>
+			<groupId>org.glassfish.hk2</groupId>
+			<artifactId>osgi-resource-locator</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.hk2</groupId>
+			<artifactId>hk2-locator</artifactId>
+			<version>${hk2.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.glassfish.hk2.external</groupId>
 			<artifactId>javax.inject</artifactId>
-			<version>2.4.0-b27</version>
+			<version>${hk2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.hk2</groupId>
+			<artifactId>hk2-api</artifactId>
+			<version>${hk2.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.hk2.external</groupId>
 			<artifactId>aopalliance-repackaged</artifactId>
-			<version>2.4.0-b27</version>
+			<version>${hk2.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.felix</groupId>

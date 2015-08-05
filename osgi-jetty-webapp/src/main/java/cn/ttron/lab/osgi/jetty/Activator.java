@@ -40,8 +40,10 @@ public class Activator implements BundleActivator
 				handler.setContextPath( "/hello" );
 				handler.setResourceBase( "." );
 				handler.setHandler( new HelloHandler() );
-				handler.setClassLoader( Thread.currentThread().getContextClassLoader() );
-				server.setHandler( handler );
+				// handler.setClassLoader( Thread.currentThread().getContextClassLoader() );
+				// handler.start();
+				// Handler[] handlers = server.getHandlers();
+				context.registerService( ContextHandler.class.getName(), handler, null );
 				System.err.println( "register Context Handler" );
 			}
 		}

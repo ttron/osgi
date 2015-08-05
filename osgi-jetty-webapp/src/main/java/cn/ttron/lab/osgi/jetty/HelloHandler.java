@@ -11,18 +11,13 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 
 public class HelloHandler extends AbstractHandler
 {
-	static int h = 0;
-
-	int hello = h++;
-
-
 	@Override
-	public void handle(String arg0, Request baseRequest, HttpServletRequest request, HttpServletResponse response)
+	public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException
 	{
-		baseRequest.setHandled( true );
+		response.setContentType( "text/html;charset=utf-8" );
 		response.setStatus( HttpServletResponse.SC_OK );
-		response.setContentType( "text/html" );
-		response.getWriter().println( "<h1>Hello OneContext " + hello + "" );
+		baseRequest.setHandled( true );
+		response.getWriter().println( "<h1>Hello World</h1>" );
 	}
 }
