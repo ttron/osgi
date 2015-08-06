@@ -92,7 +92,7 @@
 			will override these properties to remain on Java6 -->
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
-		<eclipse-jetty.version>9.3.1.v20150714</eclipse-jetty.version>
+		<eclipse-jetty.version>9.3.2.v20150730</eclipse-jetty.version>
 		<osgi-spec.version>6.0.0</osgi-spec.version>
 		<log4j.version>2.2</log4j.version>
 		<slf4j.version>1.7.12</slf4j.version>
