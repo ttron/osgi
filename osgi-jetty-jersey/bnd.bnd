@@ -5,7 +5,9 @@
 	org.glassfish.jersey.core.jersey-server,\
 	javax.ws.rs-api,\
 	javax.servlet-api,\
-	org.eclipse.jetty.server
+	org.eclipse.jetty.server,\
+	org.glassfish.jersey.containers.jersey-container-jetty-http,\
+	org.glassfish.jersey.containers.jersey-container-jetty-servlet
 Bundle-Version: 1.0.0
 Bundle-Activator: cn.ttron.lab.jetty.jersey.Activator
 Export-Package:  \
