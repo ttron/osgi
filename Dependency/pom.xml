@@ -94,7 +94,7 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<eclipse-jetty.version>9.3.2.v20150730</eclipse-jetty.version>
 		<osgi-spec.version>5.0.0</osgi-spec.version>
-		<log4j.version>2.2</log4j.version>
+		<log4j.version>2.3</log4j.version>
 		<slf4j.version>1.7.12</slf4j.version>
 		<logback.version>1.1.2</logback.version>
 		<yammer-metrics.version>2.2.0</yammer-metrics.version>
@@ -103,6 +103,41 @@
 		<jersey.version>2.19</jersey.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-jul</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>osgi-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.xml.parsers</groupId>
 			<artifactId>jaxp-api</artifactId>
